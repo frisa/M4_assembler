@@ -8,7 +8,7 @@ GEN_OPTS__FLAG :=
 GEN_CMDS__FLAG := 
 
 ORDERED_OBJS += \
-"./main.obj" \
+"./program.obj" \
 "./tm4c123gh6pm_startup_ccs.obj" \
 "../tm4c123gh6pm.cmd" \
 $(GEN_CMDS__FLAG) \
@@ -139,7 +139,7 @@ all: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 M4_assembler.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: ARM Linker'
-	"/home/jan/TI/CCS/ccsv7/tools/compiler/ti-cgt-arm_16.9.1.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 -me --define=ccs="ccs" --define=PART_TM4C123GH6PM -g --gcc --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi -z -m"M4_assembler.map" --heap_size=0 --stack_size=512 -i"/home/jan/TI/CCS/ccsv7/tools/compiler/ti-cgt-arm_16.9.1.LTS/lib" -i"/home/jan/TI/CCS/ccsv7/tools/compiler/ti-cgt-arm_16.9.1.LTS/include" --reread_libs --diag_wrap=off --display_error_number --warn_sections --xml_link_info="M4_assembler_linkInfo.xml" --rom_model -o "M4_assembler.out" $(ORDERED_OBJS)
+	"/home/jan/TI/CCS/ccsv7/tools/compiler/ti-cgt-arm_16.9.1.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 -me --define=ccs="ccs" --define=PART_TM4C123GH6PM -g --gcc --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi -k -z -m"M4_assembler.map" --heap_size=0 --stack_size=512 -i"/home/jan/TI/CCS/ccsv7/tools/compiler/ti-cgt-arm_16.9.1.LTS/lib" -i"/home/jan/TI/CCS/ccsv7/tools/compiler/ti-cgt-arm_16.9.1.LTS/include" --reread_libs --diag_wrap=off --display_error_number --warn_sections --xml_link_info="M4_assembler_linkInfo.xml" --rom_model -o "M4_assembler.out" $(ORDERED_OBJS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -152,8 +152,10 @@ M4_assembler.hex: $(EXE_OUTPUTS)
 # Other Targets
 clean:
 	-$(RM) $(BIN_OUTPUTS__QUOTED)$(EXE_OUTPUTS__QUOTED)
-	-$(RM) "main.obj" "tm4c123gh6pm_startup_ccs.obj" 
-	-$(RM) "main.d" "tm4c123gh6pm_startup_ccs.d" 
+	-$(RM) "program.obj" "tm4c123gh6pm_startup_ccs.obj" 
+	-$(RM) "tm4c123gh6pm_startup_ccs.d" 
+	-$(RM) "program.asm" "tm4c123gh6pm_startup_ccs.asm" 
+	-$(RM) "program.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
 
